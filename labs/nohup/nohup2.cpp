@@ -27,8 +27,6 @@ int main(int argc, char* argv[]) {
     }
 
     /*тут мы в дочернем процессе*/
-    usleep(200000); // подождем пока завершится (проверка)
-    std::cerr << "child pid=" << getpid() << " ppid=" << getppid() << "\n";
     // новый сессионный лидер, больше нет управляющего терминала
     if (setsid() == -1) { 
         // если не смогли
@@ -44,12 +42,12 @@ int main(int argc, char* argv[]) {
     if (pid > 0) {
         _exit(0);             // ребёнок уходит и остаётся внук
     }
-    
+
     // игнорируем SIGHUP
     signal(SIGHUP, SIG_IGN);  
 
     // открываем /dev/null один раз и направляем в него все стандартные потоки
-    int nullfd = open("/dev/null", O_RDWR);
+    int nullfd = open("/dev/null", O_RDWR | O_CLOEXEC);
     if (nullfd == -1) {
         std::cerr << "не открыл /dev/null: " << std::strerror(errno) << "\n";
         _exit(127);
