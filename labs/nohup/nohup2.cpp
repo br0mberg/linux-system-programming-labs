@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
     }
 
     if (pid > 0) {
-        // родитель ничего не ждёт = nohup
+        // родитель нам больше не нужен
         std::cout << "запустил, pid=" << pid << "\n";
         return 0;
     }
@@ -30,14 +30,14 @@ int main(int argc, char* argv[]) {
     usleep(200000); // подождем пока завершится (проверка)
     std::cerr << "child pid=" << getpid() << " ppid=" << getppid() << "\n";
     // новый сессионный лидер, больше нет управляющего терминала
-    if (setsid() == -1) {
+    if (setsid() == -1) { 
         // если не смогли
         std::cerr << "setsid не удалось: " << std::strerror(errno) << "\n";
         _exit(127);
     }
 
     // игнорируем SIGHUP
-    signal(SIGHUP, SIG_IGN);
+    signal(SIGHUP, SIG_IGN);  
 
     // открываем /dev/null один раз и направляем в него все стандартные потоки
     int nullfd = open("/dev/null", O_RDWR);
