@@ -36,6 +36,15 @@ int main(int argc, char* argv[]) {
         _exit(127);
     }
 
+    // прочитал, что добавляют ещё fork() чтобы снова не получить TTY
+    pid = fork();
+    if (pid < 0) {
+        _exit(127);
+    }
+    if (pid > 0) {
+        _exit(0);             // ребёнок уходит и остаётся внук
+    }
+    
     // игнорируем SIGHUP
     signal(SIGHUP, SIG_IGN);  
 
