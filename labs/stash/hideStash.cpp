@@ -154,15 +154,15 @@ int main(int argc, char* argv[]) {
     if (argc != 3) {
         std::cerr
             << "как запускать:\n"
-            << "  " << argv[0] << " --distort <имя>\n"
-            << "  " << argv[0] << " --restore <имя>\n";
+            << "  "<< argv[0] << " --distort <имя>\n"
+            << "  "<< argv[0] <<" --restore <имя>\n";
         return 2;
     }
     std::string cmd  = argv[1];
     std::string name = argv[2];
 
-    if (cmd == "--distort" || cmd == "-d")   return distort(name);
-    if (cmd == "--restore" || cmd == "-r")   return restore(name);
+    if (cmd == "--distort" || cmd == "-d") return distort(name);
+    if (cmd == "--restore" || cmd == "-r") return restore(name);
 
     std::cerr << "неизвестная команда: " << cmd << "\n";
     return 2;

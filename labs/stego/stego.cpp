@@ -12,7 +12,6 @@
 static const char   MAGIC[]    = "STEGJPG1";   // сигнатура флаг
 static const size_t MAGIC_LEN  = sizeof(MAGIC) - 1;
 
-
 static off_t filesize(int fd) {
     struct stat st{};
     if (fstat(fd, &st) == -1) return -1;

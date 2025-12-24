@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
     signal(SIGHUP, SIG_IGN);  
 
     // открываем /dev/null один раз и направляем в него все стандартные потоки
-    int nullfd = open("/dev/null", O_RDWR | O_CLOEXEC);
+    int nullfd = open("/dev/null", O_RDWR);
     if (nullfd == -1) {
         std::cerr << "не открыл /dev/null: " << std::strerror(errno) << "\n";
         _exit(127);
