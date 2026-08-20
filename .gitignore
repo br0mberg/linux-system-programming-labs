@@ -1,0 +1,14 @@
+.vscode/
+.idea/
+build/
+cmake-build-*/
+*.o
+*.a
+*.so
+*.out
+*.log
+*.pid
+core
+out.txt
+err.txt
+uploads/
